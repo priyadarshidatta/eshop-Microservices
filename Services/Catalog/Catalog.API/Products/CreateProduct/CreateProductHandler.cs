@@ -5,12 +5,21 @@ namespace Catalog.API.Products.CreateProduct
     public record CreateProductCommand(string Name, List<string>Category, string Description, string ImageFile, decimal Price)
         :ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
-    internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    internal class CreateProductCommandHandler(IDocumentSession session) 
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            //Create Product Entity from command Object
+            
+            //var result = await validator.ValidateAsync(command, cancellationToken);
+            //var errors = result.Errors.Select(x=>x.ErrorMessage).ToList();
 
+            //if (errors.Any()) 
+            //{
+            //    throw new ValidationException(errors.FirstOrDefault());
+            //}
+
+            //Create Product Entity from command Object
             var product = new Product
             {
                 Name = command.Name,
